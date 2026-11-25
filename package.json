@@ -1,0 +1,26 @@
+{
+  "name": "pixelfall",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A wallpaper download site built with React, Node and Supabase",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run dev -w server",
+    "dev:web": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "seed": "npm run seed -w server",
+    "db:apply": "npm run db:apply -w server",
+    "db:setup": "npm run db:apply && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

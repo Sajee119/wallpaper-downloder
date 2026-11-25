@@ -1,0 +1,17 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+
+const api = 'http://127.0.0.1:4000';
+
+export default defineConfig({
+  plugins: [tailwindcss(), react()],
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+    proxy: {
+      '/api': api,
+      '/wallpapers': api,
+    },
+  },
+});

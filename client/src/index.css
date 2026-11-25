@@ -1,0 +1,264 @@
+@import 'tailwindcss';
+
+/*
+  Pixelfall — archival, warm graphite.
+  Direction: quiet, exact, archival. World: darkroom contact sheets and printed
+  photo catalogues. One accent (amber) used rarely; everything else is the ramp.
+
+  Three themes share one set of tokens:
+    dark  — warm graphite (default)
+    night — true black for OLED screens
+    light — printed paper catalogue
+*/
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  --color-paper: #0b0a08;
+  --color-panel: #14110e;
+  --color-raised: #1d1915;
+  --color-line: #292420;
+  --color-line-2: #3d352c;
+  --color-ink: #f6f1e9;
+  --color-ink-2: #b5ac9e;
+  --color-ink-3: #8a8072;
+  --color-amber: #d9a65e;
+
+  --color-danger: #f0c6bd;
+  --color-danger-line: #5a2d26;
+  --color-danger-bg: #241412;
+  --color-ok: #bfe3cf;
+  --color-ok-line: #2f4a3d;
+  --color-ok-bg: #121e18;
+}
+
+/*
+  Overrides stay unlayered so they beat the variables @theme emits on :root.
+  Switching the data-theme attribute back to "dark" simply stops matching.
+*/
+html[data-theme='night'] {
+  color-scheme: dark;
+
+  --color-paper: #000000;
+  --color-panel: #090807;
+  --color-raised: #151312;
+  --color-line: #221f1c;
+  --color-line-2: #35302a;
+  --color-ink: #f7f3ec;
+  --color-ink-2: #aba395;
+  --color-ink-3: #7d766a;
+  --color-amber: #e2b16b;
+
+  --color-danger: #f4cec5;
+  --color-danger-line: #5f3129;
+  --color-danger-bg: #1a0f0d;
+  --color-ok: #c6e8d6;
+  --color-ok-line: #2f5242;
+  --color-ok-bg: #0b1510;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --color-paper: #f8f5ef;
+  --color-panel: #fffdfa;
+  --color-raised: #f0e9dd;
+  --color-line: #e5ded1;
+  --color-line-2: #cfc5b4;
+  --color-ink: #1b1712;
+  --color-ink-2: #5d564a;
+  --color-ink-3: #7a7163;
+  --color-amber: #a4702a;
+
+  --color-danger: #8a2f22;
+  --color-danger-line: #e7bdb5;
+  --color-danger-bg: #fdf1ee;
+  --color-ok: #1f5c3d;
+  --color-ok-line: #bcdcc9;
+  --color-ok-bg: #eef8f2;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    /* A single warm glow behind the top of the page, like light on a contact sheet. */
+    background-image: radial-gradient(
+      900px 520px at 50% -12%,
+      color-mix(in srgb, var(--color-amber) 9%, transparent),
+      transparent 72%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: rgb(213 164 92 / 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+  }
+
+  img {
+    display: block;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-2);
+    border: 2px solid var(--color-paper);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-3);
+  }
+}
+
+@layer components {
+  /* Small caps label that opens a page or a section. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--color-amber);
+    opacity: 0.75;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.7rem);
+    line-height: 0.96;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .page-lede {
+    margin-top: 0.9rem;
+    max-width: 48ch;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--color-ink-2);
+  }
+
+  /* A panel with a faint top light so surfaces read as layers, not flat boxes. */
+  .surface {
+    border: 1px solid var(--color-line);
+    border-radius: 1.1rem;
+    background-color: var(--color-panel);
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0) 46%
+    );
+  }
+
+  .surface-hover {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .surface-hover:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-line-2);
+    box-shadow: 0 28px 54px -34px rgba(0, 0, 0, 0.9);
+  }
+
+  .empty-state {
+    border: 1px dashed var(--color-line-2);
+    border-radius: 1.1rem;
+    padding: 3.75rem 1.5rem;
+    text-align: center;
+    background: color-mix(in srgb, var(--color-panel) 55%, transparent);
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-panel);
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.055),
+      transparent
+    );
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  /* Page mount: quiet rise, never a bounce. */
+  .page-enter {
+    animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-enter,
+  .skeleton::after {
+    animation: none;
+  }
+
+  .surface-hover:hover {
+    transform: none;
+  }
+}
