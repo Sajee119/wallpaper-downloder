@@ -3,7 +3,7 @@ import { formatCount, formatDate } from '../utils.js';
 import { useAuth } from '../auth.jsx';
 import { recordView } from '../history.js';
 import SetWallpaperGuide from './SetWallpaperGuide.jsx';
-import { btnGhost, btnPrimary, iconBtn } from '../ui.js';
+import { btnGhost, btnPrimary, iconOnImage } from '../ui.js';
 
 export default function WallpaperModal({
   item,
@@ -113,7 +113,7 @@ export default function WallpaperModal({
       onClick={onClose}
     >
       <div
-        className="relative grid w-full max-w-[1080px] overflow-hidden rounded-3xl border border-line-2 bg-panel shadow-[0_50px_120px_-50px_rgba(0,0,0,0.95)] lg:grid-cols-[1.5fr_1fr]"
+        className="relative grid w-full max-w-[1080px] overflow-hidden rounded-2xl border border-line-2 bg-panel shadow-[0_50px_120px_-50px_rgba(0,0,0,0.95)] lg:grid-cols-[1.5fr_1fr]"
         role="dialog"
         aria-modal="true"
         aria-label={`${item.title} preview`}
@@ -121,7 +121,7 @@ export default function WallpaperModal({
       >
         <button
           type="button"
-          className={`${iconBtn} absolute right-3 top-3 z-20`}
+          className={`${iconOnImage} absolute right-3 top-3 z-20`}
           onClick={onClose}
           aria-label="Close preview"
         >
@@ -130,7 +130,7 @@ export default function WallpaperModal({
 
         <button
           type="button"
-          className={`${iconBtn} absolute right-[52px] top-3 z-20`}
+          className={`${iconOnImage} absolute right-[52px] top-3 z-20`}
           onClick={toggleFullscreen}
           aria-label={isFullscreen ? 'Exit fullscreen preview' : 'Fullscreen preview'}
           title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
@@ -152,7 +152,7 @@ export default function WallpaperModal({
             <>
               <button
                 type="button"
-                className={`${iconBtn} absolute left-3 top-1/2 -translate-y-1/2`}
+                className={`${iconOnImage} absolute left-3 top-1/2 -translate-y-1/2`}
                 onClick={onPrev}
                 aria-label="Previous wallpaper"
               >
@@ -160,7 +160,7 @@ export default function WallpaperModal({
               </button>
               <button
                 type="button"
-                className={`${iconBtn} absolute right-3 top-1/2 -translate-y-1/2`}
+                className={`${iconOnImage} absolute right-3 top-1/2 -translate-y-1/2`}
                 onClick={onNext}
                 aria-label="Next wallpaper"
               >
@@ -182,20 +182,20 @@ export default function WallpaperModal({
             Original-resolution JPEG, ready to set as your desktop background.
           </p>
 
-          <dl className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line">
-            <div className="bg-panel p-3">
-              <dt className="text-[11px] text-ink-3">Resolution</dt>
-              <dd className="mt-1 text-[13px] tabular-nums">
+          <dl className="spec-grid mt-5 grid-cols-3">
+            <div className="spec">
+              <dt>Resolution</dt>
+              <dd>
                 {item.width} × {item.height}
               </dd>
             </div>
-            <div className="bg-panel p-3">
-              <dt className="text-[11px] text-ink-3">Downloads</dt>
-              <dd className="mt-1 text-[13px] tabular-nums">{formatCount(item.downloads)}</dd>
+            <div className="spec">
+              <dt>Downloads</dt>
+              <dd>{formatCount(item.downloads)}</dd>
             </div>
-            <div className="bg-panel p-3">
-              <dt className="text-[11px] text-ink-3">Added</dt>
-              <dd className="mt-1 text-[13px]">{formatDate(item.createdAt)}</dd>
+            <div className="spec">
+              <dt>Added</dt>
+              <dd>{formatDate(item.createdAt)}</dd>
             </div>
           </dl>
 
@@ -206,7 +206,7 @@ export default function WallpaperModal({
                   <button
                     type="button"
                     onClick={() => onTagSelect?.(tag)}
-                    className="h-7 rounded-full border border-line px-2.5 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
+                    className="h-7 rounded-md border border-line px-2.5 text-[11.5px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
                     title={`Find more ${tag}`}
                   >
                     {tag}

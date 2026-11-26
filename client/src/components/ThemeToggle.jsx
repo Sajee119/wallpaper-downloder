@@ -28,7 +28,7 @@ export default function ThemeToggle({ className = '' }) {
     <div className={`relative ${className}`} ref={containerRef}>
       <button
         type="button"
-        className="grid h-9 w-9 place-items-center rounded-full border border-line bg-panel/70 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:bg-panel hover:text-ink"
+        className="grid h-9 w-9 place-items-center rounded-[10px] border border-line bg-panel/70 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:bg-panel hover:text-ink"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={`Theme: ${current.label}. Press T to switch.`}
@@ -40,7 +40,7 @@ export default function ThemeToggle({ className = '' }) {
 
       {open && (
         <div
-          className="absolute right-0 top-[calc(100%+8px)] z-50 w-56 rounded-2xl border border-line-2 bg-panel p-1.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]"
+          className="absolute right-0 top-[calc(100%+8px)] z-50 w-56 rounded-xl border border-line-2 bg-panel p-1 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]"
           role="menu"
           aria-label="Colour theme"
         >

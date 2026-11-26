@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PageHeader from '../components/PageHeader.jsx';
 import { Link } from '../router.jsx';
 import { useAuth } from '../auth.jsx';
 import { clearDownloads, getDownloads } from '../history.js';
@@ -21,27 +22,27 @@ export default function DownloadsPage({ onDownload, downloading, onNotify, onSig
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <p className="eyebrow">History</p>
-            <h1 className="page-title mt-3">Downloads</h1>
-            <p className="page-lede">
-              The last files you saved from this browser. Downloading again re-opens the original.
-            </p>
-            {items.length > 0 && (
-              <p className="mt-2 text-[12px] tabular-nums text-ink-3">
-                {items.length} file{items.length === 1 ? '' : 's'} saved
-                {items[0]?.at ? ` · most recent ${formatDate(items[0].at)}` : ''}
-              </p>
-            )}
-          </div>
-          {items.length > 0 && (
-            <button type="button" className={btnGhostSm} onClick={clear}>
-              Clear history
-            </button>
-          )}
-        </header>
+      <div className={`${shell} page-enter page-wrap`}>
+        <PageHeader
+          eyebrow="History"
+          title="Downloads"
+          lede="The last files you saved from this browser. Downloading again re-opens the original, so nothing leaves your device."
+          meta={
+            items.length > 0
+              ? `${items.length} file${items.length === 1 ? '' : 's'} saved${
+                  items[0]?.at ? ` · most recent ${formatDate(items[0].at)}` : ''
+                }`
+              : null
+          }
+          actions={
+            items.length > 0 && (
+              <button type="button" className={btnGhostSm} onClick={clear}>
+                <i className="fa-solid fa-trash-can text-[10px]" aria-hidden="true" />
+                Clear history
+              </button>
+            )
+          }
+        />
 
         {!user && (
           <p className="mt-4 text-[12px] text-ink-3">

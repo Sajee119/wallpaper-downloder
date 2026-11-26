@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useRouter } from '../router.jsx';
 import WallpaperCard from '../components/WallpaperCard.jsx';
+import PageHeader from '../components/PageHeader.jsx';
 import SkeletonCard from '../components/SkeletonCard.jsx';
 import { useAuth } from '../auth.jsx';
 import { fetchWallpapers } from '../api.js';
@@ -62,16 +63,17 @@ export default function FavouritesPage({
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="max-w-2xl">
-          <p className="eyebrow">Your library</p>
-          <h1 className="page-title mt-3">Favourites</h1>
-          <p className="page-lede">
-            {user
-              ? 'Every wallpaper you saved, kept with your account.'
-              : 'Sign in and the heart on any wallpaper keeps it here.'}
-          </p>
-        </header>
+      <div className={`${shell} page-enter page-wrap`}>
+        <PageHeader
+          eyebrow="Your library"
+          title="Favourites"
+          lede={
+            user
+              ? 'Every wallpaper you saved, kept with your account and waiting on any device you sign in from.'
+              : 'Sign in and the heart on any wallpaper keeps it here.'
+          }
+          meta={user && favoritesReady ? `${favorites.size} saved` : null}
+        />
 
         {favoritesError && (
           <div

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from '../router.jsx';
+import PageHeader from '../components/PageHeader.jsx';
 import { fetchWallpapers } from '../api.js';
 import { shell } from '../ui.js';
 
@@ -42,14 +43,12 @@ export default function DevicesPage() {
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="max-w-2xl">
-          <p className="eyebrow">Screens</p>
-          <h1 className="page-title mt-3">Devices</h1>
-          <p className="page-lede">
-            The archive is filed by screen shape as well as mood. Pick the screen you are setting.
-          </p>
-        </header>
+      <div className={`${shell} page-enter page-wrap`}>
+        <PageHeader
+          eyebrow="Screens"
+          title="Devices"
+          lede="The archive is filed by screen shape as well as mood. Pick the screen you are setting and every file will already fit it."
+        />
 
         {status === 'error' && (
           <div
@@ -74,7 +73,7 @@ export default function DevicesPage() {
         )}
 
         {status === 'ready' && (
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+          <div className="stagger mt-10 grid gap-4 sm:grid-cols-3">
             {cards.map((card) => (
               <Link
                 key={card.key}

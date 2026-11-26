@@ -208,10 +208,24 @@ await initStore();
 // Hosts (Railway, Render, Fly, a VPS) need a public bind address; local dev keeps loopback.
 const host = process.env.HOST || '127.0.0.1';
 
-app.listen(config.port, host, () => {
+const server = app.listen(config.port, host, () => {
   console.log(
     `Pixelfall API on http://${host}:${config.port} — data source: ${
       config.useSupabase ? 'Supabase' : 'bundled demo catalog'
     }`,
   );
+});
+
+// A second copy of the API (a forgotten dev server, or another app on the same
+// port) used to crash the process with an unhandled 'error' event. Report it
+// clearly instead, so the fix is obvious: stop the other process or change PORT.
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(
+      `[api] Port ${config.port} on ${host} is already in use. Stop the process using it ` +
+        `(or set PORT to a free port) and restart.`,
+    );
+    process.exit(1);
+  }
+  throw error;
 });

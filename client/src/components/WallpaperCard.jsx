@@ -1,5 +1,5 @@
 import { formatCount } from '../utils.js';
-import { iconBtn } from '../ui.js';
+import { iconOnImage } from '../ui.js';
 
 export default function WallpaperCard({
   item,
@@ -21,13 +21,13 @@ export default function WallpaperCard({
     : 'aspect-[16/9]';
 
   return (
-    <article className="surface surface-hover group relative overflow-hidden rounded-2xl">
+    <article className="surface surface-hover group relative overflow-hidden rounded-xl">
       <img
         src={item.thumbUrl || item.url}
         alt={item.title}
         loading="lazy"
         decoding="async"
-        className={`${aspect} w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]`}
+        className={`${aspect} w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]`}
       />
 
       <span
@@ -42,14 +42,14 @@ export default function WallpaperCard({
         aria-label={`Preview ${item.title}`}
       />
 
-      <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-white/15 bg-black/45 px-2.5 py-0.5 text-[10.5px] uppercase tracking-[0.08em] text-white/85 backdrop-blur">
+      <span className="pointer-events-none absolute left-2.5 top-2.5 rounded-md border border-white/15 bg-black/50 px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-white/85 backdrop-blur">
         {item.category}
       </span>
 
       <div className="absolute right-2 top-2 z-20 flex gap-1">
         <button
           type="button"
-          className={`${iconBtn} ${isFavorite ? 'text-amber' : ''}`}
+          className={`${iconOnImage} ${isFavorite ? 'border-amber/40 bg-black/55 text-amber' : ''}`}
           onClick={() => onToggleFavorite(item)}
           aria-pressed={isFavorite}
           aria-label={
@@ -64,7 +64,7 @@ export default function WallpaperCard({
         </button>
         <button
           type="button"
-          className={iconBtn}
+          className={iconOnImage}
           onClick={() => onDownload(item)}
           disabled={busy}
           aria-label={`Download ${item.title}`}
@@ -78,8 +78,10 @@ export default function WallpaperCard({
       </div>
 
       <div className="pointer-events-none absolute inset-x-3 bottom-2.5 z-20">
-        <h3 className="text-[15px] font-medium leading-snug text-white">{item.title}</h3>
-        <p className="mt-0.5 text-[11px] tabular-nums text-white/75">
+        <h3 className="text-[14.5px] font-medium leading-snug tracking-[-0.005em] text-white">
+          {item.title}
+        </h3>
+        <p className="mt-0.5 text-[10.5px] tabular-nums text-white/70">
           {item.width} × {item.height}
           <span className="mx-1.5 text-white/45" aria-hidden="true">
             ·

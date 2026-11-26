@@ -15,9 +15,9 @@ export default function Footer({ stats, siteName = 'Pixelfall', logoLetter = '',
   const name = siteName.trim() || 'Pixelfall';
   const mark = (String(logoLetter).trim() || name).charAt(0).toUpperCase();
   return (
-    <footer className="mt-auto border-t border-line bg-panel/40">
+    <footer className="mt-auto border-t border-line bg-panel/30">
       <div className={shell}>
-        <div className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(3,1fr)] lg:gap-10">
+        <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(3,1fr)] lg:gap-10">
           <div>
             <Link to="/" className="flex items-center gap-2.5" aria-label={`${name} home`}>
               <span
@@ -33,7 +33,7 @@ export default function Footer({ stats, siteName = 'Pixelfall', logoLetter = '',
             </p>
           </div>
 
-          <nav className="flex flex-col gap-2 text-[13px] text-ink-2" aria-label="Footer">
+          <nav className="flex flex-col gap-2 text-[12.5px] text-ink-2" aria-label="Footer">
             <p className="eyebrow mb-1">Explore</p>
             {LINKS.map((entry) => (
               <Link key={entry.to} to={entry.to} className="transition-colors hover:text-ink">
@@ -42,14 +42,14 @@ export default function Footer({ stats, siteName = 'Pixelfall', logoLetter = '',
             ))}
           </nav>
 
-          <div className="flex flex-col gap-2 text-[13px] text-ink-2">
+          <div className="flex flex-col gap-2 text-[12.5px] text-ink-2">
             <p className="eyebrow mb-1">Collection</p>
             <span className="tabular-nums">{stats?.wallpapers ?? 0} wallpapers</span>
             <span className="tabular-nums">{stats?.downloads ?? 0} downloads</span>
             <span className="tabular-nums">{stats?.categories ?? 0} collections</span>
           </div>
 
-          <div className="flex flex-col gap-2 text-[13px] text-ink-2">
+          <div className="flex flex-col gap-2 text-[12.5px] text-ink-2">
             <p className="eyebrow mb-1">Built with</p>
             <span>React and Vite</span>
             <span>Node and Express</span>
@@ -57,11 +57,11 @@ export default function Footer({ stats, siteName = 'Pixelfall', logoLetter = '',
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-between gap-3 border-t border-line py-5 text-[12px] text-ink-3">
+        <div className="flex flex-wrap justify-between gap-3 border-t border-line py-5 text-[11.5px] text-ink-3">
           <span>
             © {new Date().getFullYear()} {name}
           </span>
-          <span className="flex items-center gap-4">
+          <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>{note || 'Free to download. No attribution required.'}</span>
             {onShortcuts && (
               <button

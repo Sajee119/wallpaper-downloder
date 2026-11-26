@@ -223,22 +223,20 @@ export default function HomePage({
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="eyebrow">Collections</p>
-              <h2 className="mt-2 font-display text-[28px] leading-none tracking-[-0.01em]">
-                Browse by collection
-              </h2>
+              <h2 className="section-title mt-2">Browse by collection</h2>
             </div>
-            <Link to="/categories" className="text-[12px] text-ink-2 transition-colors hover:text-ink">
+            <Link to="/categories" className="link-more">
               All collections
-              <i className="fa-solid fa-arrow-right ml-1.5 text-[10px]" aria-hidden="true" />
+              <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="stagger mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
             {categories.slice(0, 6).map((name) => (
               <Link
                 key={name}
                 to={`/c/${encodeURIComponent(name)}`}
-                className="surface surface-hover flex h-12 items-center justify-between gap-2 rounded-2xl px-4 text-[13px]"
+                className="surface surface-hover flex h-12 items-center justify-between gap-2 rounded-lg px-3.5 text-[12.5px]"
               >
                 {name}
                 <i className="fa-solid fa-arrow-right text-[10px] text-ink-3" aria-hidden="true" />
@@ -252,10 +250,10 @@ export default function HomePage({
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Archive</p>
-            <h2 className="mt-2 font-display text-[34px] leading-none tracking-[-0.01em] sm:text-[40px]">
+            <h2 className="mt-2 font-display text-[clamp(2rem,4vw,2.9rem)] leading-[0.95] tracking-[-0.02em]">
               {heading}
             </h2>
-            <p className="mt-2 text-[13px] text-ink-3" aria-live="polite">
+            <p className="meta mt-2" aria-live="polite">
               {countLabel}
             </p>
           </div>
@@ -264,7 +262,7 @@ export default function HomePage({
             <select
               value={sort}
               onChange={(event) => setSort(event.target.value)}
-              className="h-9 rounded-full border border-line bg-panel pl-3.5 pr-8 text-[13px] text-ink transition-colors focus:border-line-2 focus:outline-none"
+              className="h-9 rounded-[10px] border border-line bg-panel pl-3 pr-8 text-[12.5px] text-ink transition-colors focus:border-line-2 focus:outline-none"
             >
               <option value="trending">Most downloaded</option>
               <option value="newest">Newest first</option>
@@ -282,7 +280,7 @@ export default function HomePage({
 
           <Link
             to="/favourites"
-            className="inline-flex h-8 items-center gap-2 rounded-full border border-line bg-panel/50 px-3.5 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
+            className="inline-flex h-8 items-center gap-2 rounded-lg border border-line bg-panel/50 px-3 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
           >
             <i className="fa-regular fa-heart text-[11px]" aria-hidden="true" />
             Favourites
@@ -304,7 +302,7 @@ export default function HomePage({
         )}
 
         {loading && items.length === 0 && (
-          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 8 }).map((_, index) => (
               <SkeletonCard key={index} />
             ))}
@@ -338,7 +336,7 @@ export default function HomePage({
 
         {items.length > 0 && (
           <div
-            className={`mt-6 grid grid-cols-1 gap-5 transition-opacity sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${
+            className={`mt-6 grid grid-cols-1 gap-4 transition-opacity sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${
               loading ? 'opacity-60' : ''
             }`}
           >
@@ -389,9 +387,12 @@ export default function HomePage({
 
       <section className={`${shell} pb-16`} aria-label="What you get">
         <div className="grid gap-3 border-t border-line pt-10 sm:grid-cols-2 lg:grid-cols-4">
-          {PROMISES.map((promise) => (
-            <article className="surface rounded-2xl p-5" key={promise.title}>
-              <h3 className="text-[13px] font-medium">{promise.title}</h3>
+          {PROMISES.map((promise, index) => (
+            <article className="surface p-5" key={promise.title}>
+              <span className="text-[10.5px] tabular-nums tracking-[0.16em] text-ink-3">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-2 text-[13px] font-medium">{promise.title}</h3>
               <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-3">{promise.body}</p>
             </article>
           ))}

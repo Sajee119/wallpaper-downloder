@@ -41,7 +41,7 @@ export default function ShortcutsDialog({ onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="grid h-8 w-8 flex-none place-items-center rounded-full border border-line text-ink-3 transition-colors hover:text-ink"
+            className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-line text-ink-3 transition-colors hover:text-ink"
             aria-label="Close shortcuts"
           >
             <i className="fa-solid fa-xmark text-[13px]" aria-hidden="true" />

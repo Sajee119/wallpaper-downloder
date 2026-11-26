@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from '../router.jsx';
+import PageHeader from '../components/PageHeader.jsx';
 import { useAuth } from '../auth.jsx';
 import { getDownloads } from '../history.js';
 import { formatDate } from '../utils.js';
@@ -55,14 +56,12 @@ export default function ProfilePage({ onSignIn }) {
 
   if (!user) {
     return (
-      <main className={`${shell} page-enter flex-1 py-14`}>
-        <header className="max-w-2xl">
-          <p className="eyebrow">Account</p>
-          <h1 className="page-title mt-3">Profile</h1>
-          <p className="page-lede">
-            Sign in with Google to see your profile, favourites and download history in one place.
-          </p>
-        </header>
+      <main className={`${shell} page-enter page-wrap flex-1`}>
+        <PageHeader
+          eyebrow="Account"
+          title="Profile"
+          lede="Sign in with Google to see your profile, favourites and download history in one place. No password to remember."
+        />
 
         <div className="empty-state mt-10">
           <i className="fa-regular fa-user text-[18px] text-ink-3" aria-hidden="true" />
@@ -83,8 +82,8 @@ export default function ProfilePage({ onSignIn }) {
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="flex flex-wrap items-center gap-5 border-b border-line pb-8">
+      <div className={`${shell} page-enter page-wrap`}>
+        <header className="flex flex-wrap items-center gap-5 page-head">
           <span className="grid h-16 w-16 flex-none place-items-center overflow-hidden rounded-full border border-line-2 bg-raised text-[20px] font-medium ring-2 ring-amber/25">
             {avatar ? (
               <img
@@ -195,14 +194,14 @@ export default function ProfilePage({ onSignIn }) {
               Activity
             </h2>
 
-            <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
-              <div className="bg-panel p-4">
-                <dt className="text-[11px] text-ink-3">Saved wallpapers</dt>
-                <dd className="mt-1 text-[24px] tabular-nums">{favorites.size}</dd>
+            <dl className="spec-grid mt-4 grid-cols-2">
+              <div className="spec">
+                <dt>Saved wallpapers</dt>
+                <dd className="text-[22px]">{favorites.size}</dd>
               </div>
-              <div className="bg-panel p-4">
-                <dt className="text-[11px] text-ink-3">Downloads here</dt>
-                <dd className="mt-1 text-[24px] tabular-nums">{downloads.length}</dd>
+              <div className="spec">
+                <dt>Downloads here</dt>
+                <dd className="text-[22px]">{downloads.length}</dd>
               </div>
             </dl>
 

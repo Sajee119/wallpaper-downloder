@@ -1,3 +1,4 @@
+import PageHeader from '../components/PageHeader.jsx';
 import { Link } from '../router.jsx';
 import { formatCount } from '../utils.js';
 import { btnGhost, btnGhostSm, btnPrimary, shell } from '../ui.js';
@@ -65,15 +66,17 @@ const FAQS = [
 export default function AboutPage({ stats }) {
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="max-w-2xl">
-          <p className="eyebrow">About</p>
-          <h1 className="page-title mt-3">A small archive, chosen by hand</h1>
-          <p className="page-lede">
-            Pixelfall keeps the catalog short on purpose. Each wallpaper is picked for a specific
-            mood: a quiet forest, a wet neon street, a gradient that works behind icons.
-          </p>
-        </header>
+      <div className={`${shell} page-enter page-wrap`}>
+        <PageHeader
+          eyebrow="About"
+          title="A small archive, chosen by hand"
+          lede="Pixelfall keeps the catalog short on purpose. Each wallpaper is picked for a specific mood: a quiet forest, a wet neon street, a gradient that works behind icons."
+          meta={
+            stats
+              ? `${stats.wallpapers} wallpapers · ${stats.categories} collections`
+              : null
+          }
+        />
 
         <div className="mt-10 grid gap-3 sm:grid-cols-3">
           {STEPS.map((step) => (
@@ -86,9 +89,7 @@ export default function AboutPage({ stats }) {
 
         <section className="mt-10 grid gap-8 border-t border-line pt-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
-            <h2 className="font-display text-[26px] leading-none tracking-[-0.01em]">
-              React, Node and Supabase
-            </h2>
+            <h2 className="section-title">React, Node and Supabase</h2>
             <p className="mt-3 max-w-xl text-[13px] leading-relaxed text-ink-2">
               The React client is built with Vite and talks to an Express API. With Supabase
               configured the API reads the catalog from Postgres and streams originals from storage.
@@ -98,29 +99,24 @@ export default function AboutPage({ stats }) {
             </p>
           </div>
 
-          <dl className="flex flex-wrap gap-x-10 gap-y-4">
-            <div>
-              <dt className="text-[12px] text-ink-3">Wallpapers</dt>
-              <dd className="mt-1 text-[22px] tabular-nums">{stats?.wallpapers ?? '—'}</dd>
+          <dl className="spec-grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="spec">
+              <dt>Wallpapers</dt>
+              <dd className="text-[20px]">{stats?.wallpapers ?? '—'}</dd>
             </div>
-            <div>
-              <dt className="text-[12px] text-ink-3">Downloads</dt>
-              <dd className="mt-1 text-[22px] tabular-nums">
-                {stats ? formatCount(stats.downloads) : '—'}
-              </dd>
+            <div className="spec">
+              <dt>Downloads</dt>
+              <dd className="text-[20px]">{stats ? formatCount(stats.downloads) : '—'}</dd>
             </div>
-            <div>
-              <dt className="text-[12px] text-ink-3">Collections</dt>
-              <dd className="mt-1 text-[22px] tabular-nums">{stats?.categories ?? '—'}</dd>
+            <div className="spec">
+              <dt>Collections</dt>
+              <dd className="text-[20px]">{stats?.categories ?? '—'}</dd>
             </div>
           </dl>
         </section>
 
         <section className="mt-10 border-t border-line pt-8" aria-labelledby="about-developer">
-          <h2
-            id="about-developer"
-            className="font-display text-[26px] leading-none tracking-[-0.01em]"
-          >
+          <h2 id="about-developer" className="section-title">
             Built by
           </h2>
           <p className="mt-3 max-w-xl text-[13px] leading-relaxed text-ink-2">
@@ -193,7 +189,7 @@ export default function AboutPage({ stats }) {
         </section>
 
         <section className="mt-10 border-t border-line pt-8" aria-labelledby="about-faq">
-          <h2 id="about-faq" className="font-display text-[26px] leading-none tracking-[-0.01em]">
+          <h2 id="about-faq" className="section-title">
             Common questions
           </h2>
           <div className="mt-4 divide-y divide-line border-y border-line">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHeader from '../components/PageHeader.jsx';
 import { sendMessage } from '../api.js';
 import { shell } from '../ui.js';
 import { btnPrimary, input, label, textarea } from '../admin/ui.js';
@@ -27,19 +28,20 @@ export default function ContactPage({ settings }) {
   };
 
   return (
-    <main className={`${shell} page-enter flex-1 py-14`}>
-      <div className="max-w-[620px]">
-        <p className="eyebrow">Contact</p>
-        <h1 className="page-title mt-3">Send a request</h1>
-        <p className="page-lede">
-          Ask for a wallpaper, report a broken download, or suggest a collection. Requests land in
-          the admin inbox and get answered at{' '}
-          <span className="text-ink">{settings?.contactEmail || 'hello@pixelfall.app'}</span>.
-        </p>
+    <main className={`${shell} page-enter page-wrap flex-1`}>
+      <PageHeader
+        eyebrow="Contact"
+        title="Send a request"
+        lede="Ask for a wallpaper, report a broken download, or suggest a collection. Requests land in the admin inbox and get answered by email."
+        meta={`Replies go out from ${settings?.contactEmail || 'hello@pixelfall.app'}`}
+      />
 
+      <div className="mt-8 max-w-[620px]">
         {sent ? (
-          <div className="surface mt-8 rounded-2xl px-5 py-10 text-center">
-            <i className="fa-solid fa-envelope-circle-check text-[22px] text-amber" aria-hidden="true" />
+          <div className="surface px-5 py-10 text-center">
+            <span className="empty-icon text-amber">
+              <i className="fa-solid fa-envelope-circle-check" aria-hidden="true" />
+            </span>
             <h2 className="mt-3 font-display text-[24px]">Request sent</h2>
             <p className="mt-1.5 text-[13px] text-ink-2">
               Thanks — your message is in the queue and the admin will reply by email.
@@ -49,7 +51,7 @@ export default function ContactPage({ settings }) {
             </button>
           </div>
         ) : (
-          <form onSubmit={submit} className="surface mt-8 space-y-4 rounded-2xl p-5 sm:p-7">
+          <form onSubmit={submit} className="surface space-y-4 p-5 sm:p-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className={label} htmlFor="c-name">Name</label>

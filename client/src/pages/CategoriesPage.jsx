@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from '../router.jsx';
+import PageHeader from '../components/PageHeader.jsx';
 import SkeletonCard from '../components/SkeletonCard.jsx';
 import { fetchCategories, fetchWallpapers } from '../api.js';
 import { shell } from '../ui.js';
@@ -47,17 +48,17 @@ export default function CategoriesPage() {
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-14`}>
-        <header className="max-w-2xl">
-          <p className="eyebrow">Archive</p>
-          <h1 className="page-title mt-3">Collections</h1>
-          <p className="page-lede">
-            Every wallpaper is filed under one mood.
-            {stats
-              ? ` ${stats.wallpapers} wallpapers across ${stats.categories} collections.`
-              : ''}
-          </p>
-        </header>
+      <div className={`${shell} page-enter page-wrap`}>
+        <PageHeader
+          eyebrow="Archive"
+          title="Collections"
+          lede="Every wallpaper is filed under one mood — a place, a light, a palette. Open a collection to see what sits inside it."
+          meta={
+            stats
+              ? `${stats.wallpapers} wallpapers · ${stats.categories} collections · ${stats.downloads ?? 0} downloads`
+              : null
+          }
+        />
 
         {status === 'loading' && (
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -92,7 +93,7 @@ export default function CategoriesPage() {
         )}
 
         {cards.length > 0 && (
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="stagger mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {cards.map(({ name, cover, total }) => (
               <Link
                 key={name}

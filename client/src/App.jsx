@@ -294,7 +294,7 @@ export default function App() {
 
       {notice && (
         <div
-          className="fixed bottom-6 left-1/2 z-[90] -translate-x-1/2 rounded-full border border-line-2 bg-panel/95 px-5 py-2.5 text-[13px] text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)] backdrop-blur"
+          className="fixed bottom-6 left-1/2 z-[90] -translate-x-1/2 rounded-xl border border-line-2 bg-panel/95 px-5 py-2.5 text-[12.5px] text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)] backdrop-blur"
           role="status"
         >
           {notice}

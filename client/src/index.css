@@ -14,15 +14,15 @@
   --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
 
-  --color-paper: #0b0a08;
-  --color-panel: #14110e;
-  --color-raised: #1d1915;
-  --color-line: #292420;
-  --color-line-2: #3d352c;
-  --color-ink: #f6f1e9;
-  --color-ink-2: #b5ac9e;
+  --color-paper: #0a0908;
+  --color-panel: #131009;
+  --color-raised: #1c1813;
+  --color-line: #28231d;
+  --color-line-2: #3c342a;
+  --color-ink: #f8f3ea;
+  --color-ink-2: #b7ae9f;
   --color-ink-3: #8a8072;
-  --color-amber: #d9a65e;
+  --color-amber: #dfa961;
 
   --color-danger: #f0c6bd;
   --color-danger-line: #5a2d26;
@@ -40,14 +40,14 @@ html[data-theme='night'] {
   color-scheme: dark;
 
   --color-paper: #000000;
-  --color-panel: #090807;
-  --color-raised: #151312;
-  --color-line: #221f1c;
-  --color-line-2: #35302a;
-  --color-ink: #f7f3ec;
-  --color-ink-2: #aba395;
+  --color-panel: #080706;
+  --color-raised: #131110;
+  --color-line: #201d19;
+  --color-line-2: #332e27;
+  --color-ink: #f8f4ed;
+  --color-ink-2: #ada496;
   --color-ink-3: #7d766a;
-  --color-amber: #e2b16b;
+  --color-amber: #e3b26c;
 
   --color-danger: #f4cec5;
   --color-danger-line: #5f3129;
@@ -60,15 +60,15 @@ html[data-theme='night'] {
 html[data-theme='light'] {
   color-scheme: light;
 
-  --color-paper: #f8f5ef;
-  --color-panel: #fffdfa;
-  --color-raised: #f0e9dd;
-  --color-line: #e5ded1;
-  --color-line-2: #cfc5b4;
-  --color-ink: #1b1712;
-  --color-ink-2: #5d564a;
-  --color-ink-3: #7a7163;
-  --color-amber: #a4702a;
+  --color-paper: #f6f2ea;
+  --color-panel: #fffdf9;
+  --color-raised: #efe8db;
+  --color-line: #e4dbcb;
+  --color-line-2: #cdc2af;
+  --color-ink: #191510;
+  --color-ink-2: #5b5449;
+  --color-ink-3: #7c7364;
+  --color-amber: #9c6a25;
 
   --color-danger: #8a2f22;
   --color-danger-line: #e7bdb5;
@@ -87,22 +87,29 @@ html[data-theme='light'] {
   body {
     @apply bg-paper font-sans text-ink antialiased;
     /* A single warm glow behind the top of the page, like light on a contact sheet. */
-    background-image: radial-gradient(
-      900px 520px at 50% -12%,
-      color-mix(in srgb, var(--color-amber) 9%, transparent),
-      transparent 72%
-    );
+    background-image:
+      radial-gradient(
+        900px 520px at 50% -10%,
+        color-mix(in srgb, var(--color-amber) 10%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-panel) 55%, transparent),
+        transparent 26rem
+      );
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
 
   ::selection {
-    background-color: rgb(213 164 92 / 0.28);
+    background-color: color-mix(in srgb, var(--color-amber) 30%, transparent);
   }
 
   :focus-visible {
     outline: 2px solid var(--color-amber);
     outline-offset: 3px;
+    border-radius: 4px;
   }
 
   img {
@@ -134,52 +141,105 @@ html[data-theme='light'] {
 }
 
 @layer components {
-  /* Small caps label that opens a page or a section. */
+  /* ---------------------------------------------------------------- type */
+
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.65rem;
     font-size: 10.5px;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-ink-3);
   }
 
   .eyebrow::before {
     content: '';
-    width: 20px;
+    width: 26px;
     height: 1px;
     background: var(--color-amber);
-    opacity: 0.75;
+    opacity: 0.8;
   }
 
   .page-title {
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5vw, 3.7rem);
-    line-height: 0.96;
-    letter-spacing: -0.015em;
+    font-size: clamp(2.7rem, 6vw, 4.1rem);
+    line-height: 0.92;
+    letter-spacing: -0.022em;
     text-wrap: balance;
   }
 
   .page-lede {
-    margin-top: 0.9rem;
-    max-width: 48ch;
-    font-size: 13.5px;
-    line-height: 1.7;
+    margin-top: 1.1rem;
+    max-width: 52ch;
+    font-size: 14px;
+    line-height: 1.72;
     color: var(--color-ink-2);
+    text-wrap: pretty;
   }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 2.6vw, 1.85rem);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+  }
+
+  .meta {
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink-3);
+  }
+
+  /* ------------------------------------------------------------- layout */
+
+  .page-wrap {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .page-head {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .link-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 12px;
+    color: var(--color-ink-2);
+    transition: color 0.25s ease;
+  }
+
+  .link-more:hover {
+    color: var(--color-ink);
+  }
+
+  .link-more i {
+    transition: transform 0.25s ease;
+  }
+
+  .link-more:hover i {
+    transform: translateX(2px);
+  }
+
+  /* ----------------------------------------------------------- surfaces */
 
   /* A panel with a faint top light so surfaces read as layers, not flat boxes. */
   .surface {
     border: 1px solid var(--color-line);
-    border-radius: 1.1rem;
+    border-radius: 1rem;
     background-color: var(--color-panel);
     background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.04),
-      rgba(255, 255, 255, 0) 46%
+      168deg,
+      color-mix(in srgb, var(--color-raised) 55%, transparent),
+      transparent 58%
     );
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.035),
+      0 24px 48px -42px rgb(0 0 0 / 0.9);
   }
 
   .surface-hover {
@@ -190,18 +250,125 @@ html[data-theme='light'] {
   }
 
   .surface-hover:hover {
-    transform: translateY(-3px);
-    border-color: var(--color-line-2);
-    box-shadow: 0 28px 54px -34px rgba(0, 0, 0, 0.9);
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-amber) 26%, var(--color-line-2));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.05),
+      0 38px 64px -44px rgb(0 0 0 / 0.95);
+  }
+
+  /* A hairline-separated block of facts, used on detail and profile pages. */
+  .spec-grid {
+    display: grid;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 0.9rem;
+    background: var(--color-line);
+  }
+
+  .spec {
+    background: var(--color-panel);
+    padding: 0.85rem 1rem;
+  }
+
+  .spec dt {
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  .spec dd {
+    margin-top: 0.4rem;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
   }
 
   .empty-state {
     border: 1px dashed var(--color-line-2);
-    border-radius: 1.1rem;
-    padding: 3.75rem 1.5rem;
+    border-radius: 1rem;
+    padding: 4rem 1.5rem;
     text-align: center;
-    background: color-mix(in srgb, var(--color-panel) 55%, transparent);
+    background:
+      radial-gradient(
+        380px 200px at 50% 0%,
+        color-mix(in srgb, var(--color-raised) 65%, transparent),
+        transparent 75%
+      ),
+      color-mix(in srgb, var(--color-panel) 55%, transparent);
   }
+
+  .empty-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-raised);
+    color: var(--color-ink-3);
+    font-size: 16px;
+  }
+
+  /* ------------------------------------------------------------- chips */
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    padding-inline: 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 0.6rem;
+    font-size: 12.5px;
+    color: var(--color-ink-2);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .chip:hover {
+    background: var(--color-panel);
+    color: var(--color-ink);
+  }
+
+  .chip[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .chip:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding-inline: 0.7rem;
+    border-radius: 0.55rem;
+    color: var(--color-ink-2);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .nav-pill:hover {
+    background: var(--color-panel);
+    color: var(--color-ink);
+  }
+
+  .nav-pill[aria-current='page'] {
+    background: var(--color-raised);
+    color: var(--color-ink);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  }
+
+  /* --------------------------------------------------------- feedback */
 
   .skeleton {
     position: relative;
@@ -216,7 +383,7 @@ html[data-theme='light'] {
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.055),
+      rgb(255 255 255 / 0.055),
       transparent
     );
     animation: shimmer 1.6s linear infinite;
@@ -225,6 +392,36 @@ html[data-theme='light'] {
   /* Page mount: quiet rise, never a bounce. */
   .page-enter {
     animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Card grids settle in one after another. `backwards` keeps the finished
+     animation from overriding each card's hover transform. */
+  .stagger > * {
+    animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.04s;
+  }
+
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.08s;
+  }
+
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.12s;
+  }
+
+  .stagger > *:nth-child(5) {
+    animation-delay: 0.16s;
+  }
+
+  .stagger > *:nth-child(6) {
+    animation-delay: 0.2s;
+  }
+
+  .stagger > *:nth-child(n + 7) {
+    animation-delay: 0.24s;
   }
 }
 
@@ -254,6 +451,7 @@ html[data-theme='light'] {
   }
 
   .page-enter,
+  .stagger > *,
   .skeleton::after {
     animation: none;
   }

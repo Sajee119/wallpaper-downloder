@@ -1,12 +1,12 @@
 export const input =
-  'h-9 w-full rounded-xl border border-line bg-panel px-3 text-[13px] text-ink placeholder:text-ink-3 transition-colors focus:border-line-2 focus:outline-none';
+  'h-9 w-full rounded-[10px] border border-line bg-panel px-3 text-[13px] text-ink placeholder:text-ink-3 transition-colors focus:border-line-2 focus:outline-none';
 
 export const textarea =
-  'w-full rounded-xl border border-line bg-panel px-3 py-2 text-[13px] leading-relaxed text-ink placeholder:text-ink-3 transition-colors focus:border-line-2 focus:outline-none';
+  'w-full rounded-[10px] border border-line bg-panel px-3 py-2 text-[13px] leading-relaxed text-ink placeholder:text-ink-3 transition-colors focus:border-line-2 focus:outline-none';
 
 export const label = 'mb-1.5 block text-[12px] text-ink-3';
 
-export const card = 'rounded-xl border border-line bg-panel';
+export const card = 'surface rounded-xl';
 
 export const btn =
   'inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-line px-3 text-[13px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink disabled:opacity-50';

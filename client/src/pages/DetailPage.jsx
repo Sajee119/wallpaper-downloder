@@ -152,7 +152,7 @@ export default function DetailPage({
 
   return (
     <main className="flex-1">
-      <div className={`${shell} page-enter py-10`}>
+      <div className={`${shell} page-enter pb-16 pt-8`}>
         <nav className="flex flex-wrap items-center gap-2 text-[12px] text-ink-3" aria-label="Breadcrumb">
           <Link to="/" className="transition-colors hover:text-ink">
             Archive
@@ -171,7 +171,7 @@ export default function DetailPage({
         </nav>
 
         <article className="mt-6 grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-start">
-          <div className="overflow-hidden rounded-2xl border border-line bg-black">
+          <div className="overflow-hidden rounded-xl border border-line bg-black">
             <img src={item.url} alt={item.title} className="max-h-[72vh] w-full object-contain" />
           </div>
 
@@ -184,20 +184,20 @@ export default function DetailPage({
               Original-resolution file, free to download and use on any screen size.
             </p>
 
-            <dl className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line">
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Resolution</dt>
-                <dd className="mt-1 text-[13px] tabular-nums">
+            <dl className="spec-grid mt-5 grid-cols-3">
+              <div className="spec">
+                <dt>Resolution</dt>
+                <dd>
                   {item.width} × {item.height}
                 </dd>
               </div>
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Downloads</dt>
-                <dd className="mt-1 text-[13px] tabular-nums">{formatCount(totalDownloads)}</dd>
+              <div className="spec">
+                <dt>Downloads</dt>
+                <dd>{formatCount(totalDownloads)}</dd>
               </div>
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Added</dt>
-                <dd className="mt-1 text-[13px]">{formatDate(item.createdAt)}</dd>
+              <div className="spec">
+                <dt>Added</dt>
+                <dd>{formatDate(item.createdAt)}</dd>
               </div>
             </dl>
 
@@ -211,7 +211,7 @@ export default function DetailPage({
                         onSearch(tag);
                         navigate('/');
                       }}
-                      className="h-7 rounded-full border border-line px-2.5 text-[12px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
+                      className="h-7 rounded-md border border-line px-2.5 text-[11.5px] text-ink-2 transition-colors hover:border-line-2 hover:text-ink"
                       title={`Find more ${tag}`}
                     >
                       {tag}
@@ -268,9 +268,7 @@ export default function DetailPage({
 
         <section className="mt-12 grid gap-8 border-t border-line pt-8 lg:grid-cols-[1.5fr_1fr]">
           <div>
-            <h2 className="font-display text-[26px] leading-none tracking-[-0.01em]">
-              About this wallpaper
-            </h2>
+            <h2 className="section-title">About this wallpaper</h2>
             <p className="mt-3 max-w-2xl text-[13px] leading-relaxed text-ink-2">{description}</p>
             <p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-ink-2">
               {item.tags?.length > 0
@@ -281,27 +279,27 @@ export default function DetailPage({
                 : 'Downloads need a free Google account; previewing, browsing and searching never do.'}
             </p>
 
-            <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Made for</dt>
-                <dd className="mt-1 text-[13px]">{shape}</dd>
+            <dl className="spec-grid mt-6 grid-cols-2 sm:grid-cols-4">
+              <div className="spec">
+                <dt>Made for</dt>
+                <dd>{shape}</dd>
               </div>
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Orientation</dt>
-                <dd className="mt-1 text-[13px]">{isPortrait ? 'Portrait' : 'Landscape'}</dd>
+              <div className="spec">
+                <dt>Orientation</dt>
+                <dd>{isPortrait ? 'Portrait' : 'Landscape'}</dd>
               </div>
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Format</dt>
-                <dd className="mt-1 text-[13px]">JPEG</dd>
+              <div className="spec">
+                <dt>Format</dt>
+                <dd>JPEG</dd>
               </div>
-              <div className="bg-panel p-3">
-                <dt className="text-[11px] text-ink-3">Collection</dt>
-                <dd className="mt-1 truncate text-[13px]">{item.category}</dd>
+              <div className="spec">
+                <dt>Collection</dt>
+                <dd className="truncate">{item.category}</dd>
               </div>
             </dl>
           </div>
 
-          <div className="surface rounded-2xl p-5">
+          <div className="surface p-5">
             <h3 className="text-[13px] font-medium">Keep exploring</h3>
             <ul className="mt-2 divide-y divide-line text-[13px]">
               <li>
@@ -347,9 +345,7 @@ export default function DetailPage({
         {related.length > 0 && (
           <section className="mt-14">
             <div className="flex flex-wrap items-end justify-between gap-3">
-              <h2 className="font-display text-[26px] leading-none tracking-[-0.01em]">
-                More in {item.category}
-              </h2>
+              <h2 className="section-title">More in {item.category}</h2>
               <Link
                 to={`/c/${encodeURIComponent(item.category)}`}
                 className="text-[12px] text-ink-2 transition-colors hover:text-ink"

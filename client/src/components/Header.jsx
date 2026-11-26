@@ -142,19 +142,19 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 sm:h-[72px] sm:flex-nowrap sm:px-8 sm:py-0">
+      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:h-[68px] sm:flex-nowrap sm:px-8 sm:py-0">
         <Link to="/" className="flex items-center gap-2.5" aria-label={`${name} home`}>
           <span
-            className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-amber to-[#a9762f] font-display text-[20px] leading-none text-[#1b1207] shadow-[0_12px_24px_-18px_rgba(217,166,94,0.9)]"
+            className="grid h-9 w-9 place-items-center rounded-[10px] bg-gradient-to-br from-amber to-[#a9762f] font-display text-[20px] leading-none text-[#1b1207] shadow-[0_12px_24px_-18px_rgba(217,166,94,0.9)]"
             aria-hidden="true"
           >
             {mark}
           </span>
-          <span className="font-display text-[23px] leading-none tracking-[-0.01em]">{name}</span>
+          <span className="font-display text-[22px] leading-none tracking-[-0.015em]">{name}</span>
         </Link>
 
         <nav
-          className="order-4 -mx-1 flex w-full items-center gap-5 overflow-x-auto pb-1 text-[13px] sm:order-none sm:mx-0 sm:w-auto sm:overflow-visible sm:pb-0"
+          className="order-4 -mx-1 flex w-full items-center gap-0.5 overflow-x-auto pb-1 text-[12.5px] sm:order-none sm:mx-0 sm:w-auto sm:overflow-visible sm:pb-0"
           aria-label="Primary"
         >
           {NAV.map((entry) => {
@@ -164,9 +164,7 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
                 key={entry.to}
                 to={entry.to}
                 aria-current={active ? 'page' : undefined}
-                className={`relative shrink-0 whitespace-nowrap py-1 transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-amber after:transition-transform after:duration-300 ${
-                  active ? 'text-ink after:scale-x-100' : 'text-ink-2 hover:text-ink'
-                }`}
+                className="nav-pill shrink-0 whitespace-nowrap"
               >
                 {entry.label}
               </Link>
@@ -201,7 +199,7 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
               onKeyDown={onSearchKeyDown}
               placeholder="Search wallpapers"
               aria-label="Search wallpapers"
-              className="h-9 w-full rounded-full border border-line bg-panel/70 pl-9 pr-3.5 text-[13px] text-ink transition-colors placeholder:text-ink-3 focus:border-line-2 focus:bg-panel focus:outline-none"
+              className="h-9 w-full rounded-[10px] border border-line bg-panel/70 pl-9 pr-3.5 text-[13px] text-ink transition-colors placeholder:text-ink-3 focus:border-line-2 focus:bg-panel focus:outline-none"
             />
           </label>
 
@@ -210,7 +208,7 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
               id="search-suggestions"
               role="listbox"
               aria-label="Search suggestions"
-              className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 overflow-hidden rounded-2xl border border-line-2 bg-panel py-1.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]"
+              className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 overflow-hidden rounded-xl border border-line-2 bg-panel p-1 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]"
             >
               {entries.length === 0 ? (
                 <p className="px-3 py-2 text-[12px] text-ink-3">No matches</p>
@@ -224,7 +222,7 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
                     aria-selected={index === activeIndex}
                     onMouseEnter={() => setActiveIndex(index)}
                     onClick={() => choose(entry)}
-                    className={`flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition-colors ${
+                    className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left transition-colors ${
                       index === activeIndex ? 'bg-raised text-ink' : 'text-ink-2'
                     }`}
                   >
@@ -241,7 +239,7 @@ export default function Header({ query, onQuery, source, siteName = 'Pixelfall',
           )}
         </div>
 
-        <span className="hidden items-center gap-2 text-[12px] text-ink-3 md:flex">
+        <span className="hidden items-center gap-2 rounded-full border border-line bg-panel/50 px-2.5 py-1 text-[11px] text-ink-3 md:inline-flex">
           <span
             className={`h-1.5 w-1.5 rounded-full ${
               source === 'supabase' ? 'bg-emerald-400' : 'bg-ink-3'

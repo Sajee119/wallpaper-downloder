@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from '../router.jsx';
 import { formatCount } from '../utils.js';
-import { btnGhost, btnPrimary, iconBtn, shell } from '../ui.js';
+import { btnGhost, btnPrimary, iconOnImage, shell } from '../ui.js';
 
 const AUTOPLAY_MS = 6000;
 
@@ -54,7 +54,7 @@ export default function Hero({
 
   return (
     <section
-      className="relative isolate flex min-h-[600px] items-end overflow-hidden border-b border-line lg:min-h-[720px]"
+      className="relative isolate flex min-h-[560px] items-end overflow-hidden border-b border-line lg:min-h-[680px]"
       aria-roledescription="carousel"
       aria-label="Featured wallpapers"
       onMouseEnter={() => setPaused(true)}
@@ -97,17 +97,17 @@ export default function Hero({
         aria-hidden="true"
       />
 
-      <div className={`${shell} pb-14 pt-28 lg:pb-16`}>
+      <div className={`${shell} pb-12 pt-24 lg:pb-14`}>
         {kicker ? (
-          <p className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-line-2 bg-paper/55 px-3.5 py-1 text-[10.5px] uppercase tracking-[0.18em] text-ink-2 backdrop-blur">
+          <p className="mb-4 inline-flex items-center gap-2.5 rounded-md border border-line-2 bg-paper/55 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-ink-2 backdrop-blur">
             <span className="h-1 w-1 rounded-full bg-amber" aria-hidden="true" />
             {kicker}
           </p>
         ) : null}
-        <h1 className="max-w-[16ch] font-display text-[clamp(3.1rem,6.8vw,5.2rem)] leading-[0.94] tracking-[-0.015em]">
+        <h1 className="max-w-[16ch] font-display text-[clamp(3rem,6.6vw,5.1rem)] leading-[0.92] tracking-[-0.022em]">
           {heading}
         </h1>
-        <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ink-2">{body}</p>
+        <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-ink-2">{body}</p>
 
         <div className="mt-8 flex flex-wrap gap-2.5">
           <button type="button" className={btnPrimary} onClick={onBrowse}>
@@ -125,20 +125,24 @@ export default function Hero({
           </button>
         </div>
 
-        <dl className="mt-12 inline-flex flex-wrap gap-x-10 gap-y-4 rounded-2xl border border-line bg-paper/55 px-6 py-5 backdrop-blur-md">
-          <div>
-            <dt className="text-[12px] text-ink-3">Wallpapers</dt>
-            <dd className="mt-1 text-[22px] tabular-nums">{stats?.wallpapers ?? '—'}</dd>
+        <dl className="mt-10 grid max-w-md grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line/60 backdrop-blur-md">
+          <div className="bg-paper/65 px-4 py-3.5">
+            <dt className="text-[10.5px] uppercase tracking-[0.08em] text-ink-3">Wallpapers</dt>
+            <dd className="mt-1.5 text-[21px] tabular-nums leading-none">
+              {stats?.wallpapers ?? '—'}
+            </dd>
           </div>
-          <div>
-            <dt className="text-[12px] text-ink-3">Downloads</dt>
-            <dd className="mt-1 text-[22px] tabular-nums">
+          <div className="bg-paper/65 px-4 py-3.5">
+            <dt className="text-[10.5px] uppercase tracking-[0.08em] text-ink-3">Downloads</dt>
+            <dd className="mt-1.5 text-[21px] tabular-nums leading-none">
               {stats ? formatCount(stats.downloads) : '—'}
             </dd>
           </div>
-          <div>
-            <dt className="text-[12px] text-ink-3">Collections</dt>
-            <dd className="mt-1 text-[22px] tabular-nums">{stats?.categories ?? '—'}</dd>
+          <div className="bg-paper/65 px-4 py-3.5">
+            <dt className="text-[10.5px] uppercase tracking-[0.08em] text-ink-3">Collections</dt>
+            <dd className="mt-1.5 text-[21px] tabular-nums leading-none">
+              {stats?.categories ?? '—'}
+            </dd>
           </div>
         </dl>
       </div>
@@ -155,7 +159,7 @@ export default function Hero({
 
           <button
             type="button"
-            className={iconBtn}
+            className={iconOnImage}
             onClick={() => step(-1)}
             aria-label="Previous featured wallpaper"
             disabled={total < 2}
@@ -172,7 +176,7 @@ export default function Hero({
 
           <button
             type="button"
-            className={iconBtn}
+            className={iconOnImage}
             onClick={() => step(1)}
             aria-label="Next featured wallpaper"
             disabled={total < 2}
@@ -182,7 +186,7 @@ export default function Hero({
 
           <button
             type="button"
-            className={iconBtn}
+            className={iconOnImage}
             onClick={() => setPlaying((value) => !value)}
             aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
             aria-pressed={!playing}
